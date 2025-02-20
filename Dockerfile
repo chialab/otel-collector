@@ -1,7 +1,7 @@
 ###
 # Collector builder
 ###
-FROM --platform=$BUILDPLATFORM otel/opentelemetry-collector-builder:0.119.0 AS builder
+FROM --platform=$BUILDPLATFORM otel/opentelemetry-collector-builder:0.120.0 AS builder
 
 ARG TARGETOS
 ARG TARGETARCH
