@@ -1,15 +1,18 @@
 ###
 # Collector builder
 ###
-FROM otel/opentelemetry-collector-builder:0.119.0 AS builder
+FROM --platform=$BUILDPLATFORM otel/opentelemetry-collector-builder:0.119.0 AS builder
+
+ARG TARGETOS
+ARG TARGETARCH
 
 COPY builder-config.yaml /home/ocb/builder-config.yaml
-RUN ocb --config=/home/ocb/builder-config.yaml
+RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} ocb --config=/home/ocb/builder-config.yaml
 
 ###
 # Certificates
 ###
-FROM alpine:3.21 AS certs
+FROM --platform=$BUILDPLATFORM alpine:3.21 AS certs
 
 RUN apk --update add ca-certificates
 
