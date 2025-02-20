@@ -1,7 +1,7 @@
 ###
 # Collector builder
 ###
-FROM --platform=$BUILDPLATFORM otel/opentelemetry-collector-builder:0.119.0 AS builder
+FROM --platform=$BUILDPLATFORM otel/opentelemetry-collector-builder:0.120.0 AS builder
 
 ARG TARGETOS
 ARG TARGETARCH
@@ -22,7 +22,8 @@ RUN apk --update add ca-certificates
 FROM scratch
 
 ARG USER_UID=10001
-USER ${USER_UID}
+ARG USER_GID=10001
+USER ${USER_UID}:${USER_GID}
 
 COPY --from=certs /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 COPY --from=builder --chmod=755 /home/ocb/output/otelcol /otelcol
