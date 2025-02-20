@@ -10,7 +10,7 @@ jobs:
   check-container:
     name: Check that container builds
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 30
     steps:
       - name: Checkout
         uses: actions/checkout@v4
