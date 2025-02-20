@@ -1,7 +1,7 @@
 ###
 # Collector builder
 ###
-FROM otel/opentelemetry-collector-builder:latest AS builder
+FROM otel/opentelemetry-collector-builder:0.119.0 AS builder
 
 COPY builder-config.yaml /home/ocb/builder-config.yaml
 RUN ocb --config=/home/ocb/builder-config.yaml
